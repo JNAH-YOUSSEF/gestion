@@ -22,7 +22,11 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('home',function (){
         return view('home');
     });
+  
     Route::resource('employes' , EmployesController::class) ; 
+
+    Route::get('/employes/{employe}/vacation', [EmployesController::class , 'vacationRequest'])->name('vacation.request') ;
+    Route::get('/employes/{id}/certificate', [EmployesController::class , 'certificateRequest'])->name('certificate.request');
 });
 
 Auth::routes();

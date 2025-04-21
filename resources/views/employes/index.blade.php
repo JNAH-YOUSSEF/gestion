@@ -29,9 +29,9 @@ List of Employes | Laravel Employes App
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                @foreach ($employes as $key => $employe)
+                                @foreach ($employes as $employe)
                                     <tr>
-                                        <td>{{ $key += 1 }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $employe->fullname }}</td>
                                         <td>{{ $employe->depart }}</td>
                                         <td>{{ $employe->hire_date }}</td>
@@ -42,10 +42,10 @@ List of Employes | Laravel Employes App
                                             <a href="{{ route('employes.edit', $employe->registration_number) }}" class="btn btn-sm btn-outline-warning mx-2" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <form action="{{ route('employes.destroy', $employe->registration_number) }}" method="POST" class="d-inline">
+                                            <form action="{{ route('employes.destroy', $employe->registration_number) }}" method="POST" class="d-inline delete-form">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')" title="Delete">
+                                                <button type="button" onclick="deleteEmp(event, this)" class="btn btn-sm btn-outline-danger" title="Delete">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </form>
@@ -62,28 +62,42 @@ List of Employes | Laravel Employes App
 </div>
 @endsection
 
-
 @section('js')
     <script>
-          $(document).ready(function() {
+        $(document).ready(function() {
             $('#myTable').DataTable({
-                dom : 'Bfrtip' , 
-                buttons : [
-                      'copy' , 'excel' , 'csv' ,'pdf' , 'print' ,'colvis'
-                ]
-            })
-          })
+                dom: 'Bfrtip',
+                buttons: ['copy', 'excel', 'csv', 'pdf', 'print', 'colvis']
+            });
+        });
+
+        function deleteEmp(event, button) {
+            event.preventDefault();
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    button.closest('form').submit();
+                }
+            });
+        }
     </script>
+
     @if (session('success'))
         <script>
             Swal.fire({
-                position: "top ",
+                position: "top",
                 icon: "success",
                 title: "{{ session('success') }}",
                 showConfirmButton: false,
                 timer: 2000
-});
+            });
         </script>
-        
     @endif
 @endsection

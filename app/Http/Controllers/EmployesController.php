@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employe;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Cast\String_;
 
 class EmployesController extends Controller
 {
@@ -52,7 +53,10 @@ class EmployesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $employe = Employe::where('registration_number' , $id)->first() ; 
+        return view('employes.show')->with([
+              'employe' => $employe
+        ]) ; 
     }
 
     /**
@@ -74,7 +78,7 @@ class EmployesController extends Controller
     {
         $employe=Employe::where('registration_number',$id)->first();
         $this->validate($request, [
-            'registration_number' => 'required|numeric|digits_between:1,10|unique:employes,registration_number',
+            'registration_number' => 'required|numeric|digits_between:1,10|unique:employes,id,' . $employe->registration_number,
             'fullname'            => 'required|string|min:3|max:255',
             'depart'              => 'required|string|max:100',
             'hire_date'           => 'required|date|before_or_equal:today',
@@ -91,6 +95,25 @@ class EmployesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+            $employe = Employe::where('registration_number' , $id)->first() ; 
+            $employe->delete() ;
+            return redirect()->route('employes.index')->with(['success' => 'Employe Deleted successfully']) ;
+
     }
+
+
+    public function vacationRequest(string $id) {
+
+          $employe = Employe::where('registration_number' , $id)->first() ; 
+          return view('employes.vocation-request')->with([
+             'employe' => $employe
+          ]) ; 
+    }
+
+    public function certificateRequest($id) {
+        $employe = Employe::where('registration_number' , $id)->first() ; 
+        return view('employes.certificate-request')->with([
+           'employe' => $employe
+        ]) ; 
+  }
 }
