@@ -23,7 +23,7 @@ Show Employer | Laravel Employes App
                         <a href="{{ route('vacation.request' , $employe->registration_number) }}" class="btn btn-outline-dark">
                               Vacation Request
                         </a>
-                        <a href="#" class="btn btn-outline-danger">
+                        <a href="{{ route('certificate.request',$employe->registration_number) }}" class="btn btn-outline-danger">
                             Work Certificate
                       </a>
                 </div>

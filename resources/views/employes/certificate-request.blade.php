@@ -9,23 +9,25 @@
             <div class="card my-5">
                 <div class="card-header bg-white text-center p-3">
                     <h3 class="text-dark">
-                        Vacation Request
+                        Certificate of employment
                     </h3>
                 </div>
                 <div class="card-body">
                     <p class="lead">
-                        <b>{{$employe->fullname}}</b> is presently employed with me in the following :
+                        This is to certify that <b>{{$employe->fullname}}</b> is presently employed with me in the following :
                     </p>
                     <p class="lead">
                         <b>{{$employe->depart}}</b> departement.
                     </p>
                     <p class="lead">
-                        He is requesting a vacation starting from <b>________________</b>
+                        Their employment began on <b>{{$employe->hire_date}}</b>
                     </p>
                     <p class="lead">
-                        And ends on <b>______________</b>
+                        This Certification is being issued upon the request of <b>{{$employe->fullname}}</b> for whatever legal purpose it may serve.
                     </p>
-
+                    <p class="lead">
+                        Issued on <b>{{\Carbon\Carbon::today()->toDateString()}}</b> at <b>{{\Carbon\Carbon::now()->toTimeString()}}</b>
+                    </p>
                     <p class="m-5">
                         ___________
                         ___________
