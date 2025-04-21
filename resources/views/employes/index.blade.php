@@ -74,4 +74,16 @@ List of Employes | Laravel Employes App
             })
           })
     </script>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                position: "top ",
+                icon: "success",
+                title: "{{ session('success') }}",
+                showConfirmButton: false,
+                timer: 2000
+});
+        </script>
+        
+    @endif
 @endsection

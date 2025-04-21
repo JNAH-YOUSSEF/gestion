@@ -24,7 +24,7 @@ class EmployesController extends Controller
      */
     public function create()
     {
-        //
+        return view('employes.create') ;
     }
 
     /**
@@ -33,6 +33,18 @@ class EmployesController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'registration_number' => 'required|numeric|digits_between:1,10|unique:employes,registration_number',
+            'fullname'            => 'required|string|min:3|max:255',
+            'depart'              => 'required|string|max:100',
+            'hire_date'           => 'required|date|before_or_equal:today',
+            'phone'               => 'required|regex:/^0[5-7][0-9]{8}$/',
+            'address'             => 'required|string|max:255',
+            'city'                => 'required|string|max:100',
+        ]);
+        Employe::create($request->except('_token')) ;
+        return redirect()->route('employes.index')->with(['success' => 'Employe created successfully']) ;
+        
     }
 
     /**
@@ -48,7 +60,11 @@ class EmployesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $empolye=Employe::where('registration_number',$id)->first();
+        return view('employes.edit')->with([
+            'employe' => $empolye
+        ]) ;
+        
     }
 
     /**
@@ -56,7 +72,18 @@ class EmployesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $employe=Employe::where('registration_number',$id)->first();
+        $this->validate($request, [
+            'registration_number' => 'required|numeric|digits_between:1,10|unique:employes,registration_number',
+            'fullname'            => 'required|string|min:3|max:255',
+            'depart'              => 'required|string|max:100',
+            'hire_date'           => 'required|date|before_or_equal:today',
+            'phone'               => 'required|regex:/^0[5-7][0-9]{8}$/',
+            'address'             => 'required|string|max:255',
+            'city'                => 'required|string|max:100',
+        ]);
+        $employe->update($request->except('_token','_method')) ;
+        return redirect()->route('employes.index')->with(['success' => 'Employe Updated successfully']) ;
     }
 
     /**
