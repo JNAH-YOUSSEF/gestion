@@ -79,7 +79,7 @@ class EmployesController extends Controller
         $employe=Employe::where('registration_number',$id)->first();
         $this->validate($request, [
             'registration_number' => 'required|numeric|digits_between:1,10|unique:employes,id,' . $employe->registration_number,
-            'fullname'            => 'required|string|min:3|max:255',
+            'fullname'            => 'required|string|min:3|max:255|unique:employes,id,' . $employe->fullname,
             'depart'              => 'required|string|max:100',
             'hire_date'           => 'required|date|before_or_equal:today',
             'phone'               => 'required|regex:/^0[5-7][0-9]{8}$/',
