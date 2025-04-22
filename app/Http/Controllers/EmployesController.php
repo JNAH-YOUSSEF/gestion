@@ -116,4 +116,29 @@ class EmployesController extends Controller
            'employe' => $employe
         ]) ; 
   }
+  public function statistics()
+{
+    // Nombre total d'employés
+    $totalEmployees = Employe::count();
+
+    // Nombre d'employés par ville
+    $employeesByCity = Employe::selectRaw('city, COUNT(*) as count')
+        ->groupBy('city')
+        ->get();
+
+    // Nombre d'employés par département
+    $employeesByDepartment = Employe::selectRaw('depart, COUNT(*) as count')
+        ->groupBy('depart')
+        ->get();
+
+    // Employés embauchés dans les 30 derniers jours
+    $recentHires = Employe::where('hire_date', '>=', now()->subDays(30))->count();
+
+    return view('employes.statistics', [
+        'totalEmployees' => $totalEmployees,
+        'employeesByCity' => $employeesByCity,
+        'employeesByDepartment' => $employeesByDepartment,
+        'recentHires' => $recentHires,
+    ]);
+}
 }

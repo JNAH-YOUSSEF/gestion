@@ -325,6 +325,11 @@ return [
                     'url' => 'admin/employes/create',
                     'icon' => 'fas fa-fw fa-user-plus'
                 ],
+                [
+                    'text' => 'Statistics', // Nouveau lien
+                    'url' => 'admin/employes/statistics', // URL de la nouvelle page
+                    'icon' => 'fas fa-fw fa-chart-bar' // Icône pour les statistiques
+                ],
                     
             ],
         ],

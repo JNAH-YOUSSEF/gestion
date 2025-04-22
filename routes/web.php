@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+// hadi dyl statistics
+
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/employes/statistics', [App\Http\Controllers\EmployesController::class, 'statistics'])->name('employes.statistics');
+});
+
 
 Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('home',function (){
@@ -32,3 +40,4 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
