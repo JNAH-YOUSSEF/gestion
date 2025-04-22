@@ -39,7 +39,7 @@ class EmployesController extends Controller
             'fullname'            => 'required|string|min:3|max:255',
             'depart'              => 'required|string|max:100',
             'hire_date'           => 'required|date|before_or_equal:today',
-            'phone'               => 'required|regex:/^0[5-7][0-9]{8}$/',
+            'phone'               => 'required',
             'address'             => 'required|string|max:255',
             'city'                => 'required|string|max:100',
         ]);
