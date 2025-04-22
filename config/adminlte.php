@@ -330,6 +330,11 @@ return [
                     'url' => 'admin/employes/statistics', // URL de la nouvelle page
                     'icon' => 'fas fa-fw fa-chart-bar' // Icône pour les statistiques
                 ],
+                [
+                    'text' => 'Requests',
+                    'url'  => 'admin/employes/requests',
+                    'icon' => 'fas fa-fw fa-envelope',
+                ],
                     
             ],
         ],

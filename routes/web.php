@@ -25,6 +25,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/employes/statistics', [App\Http\Controllers\EmployesController::class, 'statistics'])->name('employes.statistics');
 });
 
+// hadi dyl request
+
+Route::prefix('admin')->middleware('auth')->group(function () {
+    // Route pour les demandes
+    Route::get('/employes/requests', [App\Http\Controllers\EmployesController::class, 'requests'])->name('employes.requests');
+});
 
 Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('home',function (){

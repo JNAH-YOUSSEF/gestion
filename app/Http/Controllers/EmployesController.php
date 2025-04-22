@@ -141,4 +141,17 @@ class EmployesController extends Controller
         'recentHires' => $recentHires,
     ]);
 }
+
+public function requests()
+{
+    // Exemple : Récupérer les demandes des employés
+    $requests = [
+        ['type' => 'Vacation', 'status' => 'Approved', 'date' => '2025-04-20'],
+        ['type' => 'Certificate', 'status' => 'Pending', 'date' => '2025-04-18'],
+    ];
+
+    return view('employes.requests', [
+        'requests' => $requests,
+    ]);
+}
 }
