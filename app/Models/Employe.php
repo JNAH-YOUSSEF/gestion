@@ -16,5 +16,6 @@ class Employe extends Model
         'address',
         'phone',
         'city',
+        'password' , 
     ];
 }

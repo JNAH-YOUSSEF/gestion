@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeAuthController;
 use App\Http\Controllers\EmployesController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,3 +48,14 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/employee/login', [EmployeeAuthController::class, 'showLoginForm'])->name('employee.login');
+Route::post('/employee/login', [EmployeeAuthController::class, 'login']);
+Route::post('/employee/logout', [EmployeeAuthController::class, 'logout'])->name('employee.logout');
+
+
+Route::get('/employee/dashboard', function () {
+    if (!session()->has('employee_id')) {
+        return redirect('/employee/login');
+    }
+    return view('employee.dashboard');
+});

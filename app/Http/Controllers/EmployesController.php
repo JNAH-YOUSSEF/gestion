@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Employe;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\Cast\String_;
 
 class EmployesController extends Controller
 {
@@ -42,8 +41,25 @@ class EmployesController extends Controller
             'phone'               => 'required',
             'address'             => 'required|string|max:255',
             'city'                => 'required|string|max:100',
+            'password'            => 'required|string|min:6', 
+
         ]);
-        Employe::create($request->except('_token')) ;
+
+
+
+
+        Employe::create([
+            'registration_number' => $request->registration_number,
+            'fullname' => $request->fullname,
+            'depart' => $request->depart,
+            'hire_date' => $request->hire_date,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'city' => $request->city,
+            'password' => bcrypt($request->password),
+        ]);
+        
+
         return redirect()->route('employes.index')->with(['success' => 'Employe created successfully']) ;
         
     }
