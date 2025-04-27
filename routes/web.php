@@ -59,3 +59,19 @@ Route::get('/employee/dashboard', function () {
     }
     return view('employee.dashboard');
 });
+
+
+Route::get('/employee/dashboard', function () {
+    // Check if the employee is authenticated
+    if (!auth('employee')->check()) {
+        return redirect('/employee/login');
+    }
+
+    // Get the authenticated employee
+    $employee = auth('employee')->user();
+
+
+    // Pass the employee data to the dashboard view
+    return view('employee.dashboard', compact('employee'));
+});
+
