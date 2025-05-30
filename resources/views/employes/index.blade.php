@@ -4,9 +4,7 @@
 List of Employes | Laravel Employes App 
 @endsection
 
-@section('content_header')
-    <h1 class="text-center text-primary">List of Employes</h1>
-@endsection
+
 
 @section('content')
 <div class="container">

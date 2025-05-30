@@ -16,15 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-// hadi dyl statistics et request 
-Route::prefix('admin')->middleware('auth')->group(function () {
-    Route::get('/employes/statistics', [App\Http\Controllers\EmployesController::class, 'statistics'])->name('employes.statistics');
-    Route::get('/employes/requests', [App\Http\Controllers\EmployesController::class, 'requests'])->name('employes.requests');
-});
 
 
 
@@ -32,11 +24,15 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('home',function (){
         return view('home');
     });
+    Route::get('/employes/statistics', [App\Http\Controllers\EmployesController::class, 'statistics'])->name('employes.statistics');
+    Route::get('/employes/requests', [App\Http\Controllers\EmployesController::class, 'requests'])->name('employes.requests');
 
     Route::resource('employes' , EmployesController::class) ; 
 
     Route::get('/employes/{employe}/vacation', [EmployesController::class , 'vacationRequest'])->name('vacation.request') ;
     Route::get('/employes/{id}/certificate', [EmployesController::class , 'certificateRequest'])->name('certificate.request');
+
+    
 });
 
 //admin
@@ -44,6 +40,10 @@ Auth::routes();
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return view('welcome');
+});
+
 
 //employe
 Route::get('/employee/login', [EmployeeAuthController::class, 'showLoginForm'])->name('employee.login');

@@ -18,6 +18,7 @@ class EmployeeAuthController extends Controller
 
         $employee = auth('employee')->user();
         $lastLoginTime = $employee->last_login_at; 
+        
 
             return view('employee.dashboard', compact('employee', 'lastLoginTime'));
     }
@@ -28,19 +29,17 @@ class EmployeeAuthController extends Controller
 
     public function login(Request $request){
             $request->validate([
-                'email' => 'required|string',
+                'fullname' => 'required|string',
                 'password' => 'required|string',
             ]);
 
-            $employee = Employe::where('email', $request->email)->first();
-
-
+             $employee = Employe::where('fullname', $request->fullname)->first();
 
             if ($employee && Hash::check($request->password, $employee->password)) {
                 auth('employee')->login($employee);
                 return redirect('/employee/dashboard');
             } else {
-                return back()->withErrors(['Email' => 'Email or password incorrect']);
+                return back()->withErrors(['fullname' => 'fullname or password incorrect']);
             }
     }
 

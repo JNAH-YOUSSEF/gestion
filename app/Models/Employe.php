@@ -21,5 +21,6 @@ class Employe extends Model implements Authenticatable
         'phone',
         'city',
         'password' , 
+        'image'
     ];
 }

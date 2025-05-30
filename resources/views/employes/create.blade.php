@@ -4,10 +4,6 @@
 Add new employer | Laravel Employes App 
 @endsection
 
-@section('content_header')
-    <h1 class="text-center text-primary">Add new employer</h1>
-@endsection
-
 @section('content')
 <div class="container">
     <div class="row">
@@ -19,7 +15,7 @@ Add new employer | Laravel Employes App
                 <div class="card-body">
                     @if ($errors->any())
                         <div class="alert alert-danger">
-                            <h5 class="mb-2"><i class="fas fa-exclamation-circle me-2"></i> Erreurs de validation :</h5>
+                            <h5 class="mb-2"><i class="fas fa-exclamation-circle me-2"></i> Validation Errors:</h5>
                             <ul class="mb-0 ps-3">
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -28,60 +24,76 @@ Add new employer | Laravel Employes App
                         </div>
                     @endif
 
-                    <form action="{{ route('employes.store') }}" method="POST" class="mt-3">
+                    <form action="{{ route('employes.store') }}" method="POST" class="mt-3" enctype="multipart/form-data">
                         @csrf
-                        <div class="form-group mb-3">
-                            <label for="fullname">Full Name</label>
-                            <input type="text" value="{{ old('fullname') }}" class="form-control @error('fullname') is-invalid @enderror" name="fullname" id="fullname" placeholder="Enter full name">
-                            @error('fullname')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="fullname">Full Name</label>
+                                    <input type="text" value="{{ old('fullname') }}" class="form-control @error('fullname') is-invalid @enderror" name="fullname" id="fullname" placeholder="Enter full name">
+                                    @error('fullname')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="registration_number">Registration Number</label>
+                                    <input type="text" value="{{ old('registration_number') }}" class="form-control @error('registration_number') is-invalid @enderror" name="registration_number" id="registration_number" placeholder="Registration Number">
+                                    @error('registration_number')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label for="registration_number">Registration Number</label>
-                            <input type="text" value="{{ old('registration_number') }}" class="form-control @error('registration_number') is-invalid @enderror" name="registration_number" id="registration_number" placeholder="Registration Number">
-                            @error('registration_number')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="depart">Department</label>
+                                    <input type="text" value="{{ old('depart') }}" class="form-control @error('depart') is-invalid @enderror" name="depart" id="depart" placeholder="Department">
+                                    @error('depart')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="hire_date">Hire Date</label>
+                                    <input type="date" value="{{ old('hire_date') }}" class="form-control @error('hire_date') is-invalid @enderror" name="hire_date" id="hire_date">
+                                    @error('hire_date')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label for="depart">Department</label>
-                            <input type="text" value="{{ old('depart') }}" class="form-control @error('depart') is-invalid @enderror" name="depart" id="depart" placeholder="Department">
-                            @error('depart')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label for="hire_date">Hire Date</label>
-                            <input type="date" value="{{ old('hire_date') }}" class="form-control @error('hire_date') is-invalid @enderror" name="hire_date" id="hire_date">
-                            @error('hire_date')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label for="phone">Phone</label>
-                            <input type="tel" value="{{ old('phone') }}" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="Phone number">
-                            @error('phone')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="phone">Phone</label>
+                                    <input type="tel" value="{{ old('phone') }}" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="Phone number">
+                                    @error('phone')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="city">City</label>
+                                    <input type="text" value="{{ old('city') }}" class="form-control @error('city') is-invalid @enderror" name="city" id="city" placeholder="City">
+                                    @error('city')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="address">Address</label>
                             <input type="text" value="{{ old('address') }}" class="form-control @error('address') is-invalid @enderror" name="address" id="address" placeholder="Address">
                             @error('address')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label for="city">City</label>
-                            <input type="text" value="{{ old('city') }}" class="form-control @error('city') is-invalid @enderror" name="city" id="city" placeholder="City">
-                            @error('city')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -93,10 +105,24 @@ Add new employer | Laravel Employes App
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
+
+                        <div class="form-group mb-4">
+                            <label for="image">Profile Image</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="image">
+                                <label class="custom-file-label" for="image" data-browse="Browse">Choose file</label>
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <small class="form-text text-muted">Upload a profile picture (JPEG, PNG, JPG - max 2MB)</small>
+                            <div class="mt-2" id="image-preview"></div>
+                        </div>
 
                         <div class="form-group text-end">
-                            <button type="submit" class="btn btn-primary px-4">Submit</button>
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="fas fa-save me-2"></i> Submit
+                            </button>
                         </div>
                     </form>
                 </div> 
@@ -104,4 +130,26 @@ Add new employer | Laravel Employes App
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+    // Update the custom file input label with the selected file name
+    document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+        var fileName = document.getElementById("image").files[0].name;
+        var nextSibling = e.target.nextElementSibling;
+        nextSibling.innerText = fileName;
+        
+        // Preview the selected image
+        var file = e.target.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                document.getElementById('image-preview').innerHTML = 
+                    '<img src="' + event.target.result + '" class="img-thumbnail mt-2" style="max-width: 200px; max-height: 200px;">';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 @endsection

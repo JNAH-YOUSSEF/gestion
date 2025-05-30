@@ -4,9 +4,6 @@
 Show Employer | Laravel Employes App 
 @endsection
 
-@section('content_header')
-    <h1 class="text-center fw-bold text-dark mb-4">👤 Employer Details</h1>
-@endsection
 
 @section('content')
 <div class="container">
@@ -14,8 +11,9 @@ Show Employer | Laravel Employes App
         <div class="col-lg-8">
             <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-header bg-primary text-white text-center rounded-top-4">
-                    <h3 class="m-0 fw-bold">
-                        <i class="fas fa-user-circle me-2"></i>{{ $employe->fullname }}
+                    <h3 class="m-0 fw-bold d-flex align-items-center">
+                        <img src="{{ asset('storage/' . $employe->image) }}" class="rounded-circle me-2" alt="{{ $employe->fullname }}" style="width:40px; height:40px; object-fit:cover;">
+                        {{ $employe->fullname }}
                     </h3>
                 </div>
                 <hr>
