@@ -17,10 +17,9 @@ class EmployeeAuthController extends Controller
              }
 
         $employee = auth('employee')->user();
-        $lastLoginTime = $employee->last_login_at; 
         
 
-            return view('employee.dashboard', compact('employee', 'lastLoginTime'));
+        return view('employee.dashboard', compact('employee'));
     }
 
     public function showLoginForm(){
