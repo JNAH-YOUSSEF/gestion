@@ -44,8 +44,8 @@
         <form action="{{ route('employee.login') }}" method="POST">
             @csrf
             <div class="form-group mb-3">
-                <input type="text" name="fullname" class="form-control @error('fullname') is-invalid @enderror" placeholder="Full Name" value="{{ old('fullname') }}" required>
-                @error('fullname')
+                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{ old('email') }}" required>
+                @error('email')
                     <div class="invalid-feedback text-start">{{ $message }}</div>
                 @enderror
             </div>

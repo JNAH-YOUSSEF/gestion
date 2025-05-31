@@ -98,6 +98,14 @@ Add new employer | Laravel Employes App
                             @enderror
                         </div>
 
+                         <div class="form-group mb-3">
+                            <label for="email">Email</label>
+                            <input type="text" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="email">
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="form-group mb-3">
                             <label for="password">Password</label>
                             <input type="password" value="{{ old('password') }}" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Enter password">

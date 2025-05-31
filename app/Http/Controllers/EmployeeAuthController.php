@@ -28,17 +28,17 @@ class EmployeeAuthController extends Controller
 
     public function login(Request $request){
             $request->validate([
-                'fullname' => 'required|string',
+                'email' => 'required|string',
                 'password' => 'required|string',
             ]);
 
-             $employee = Employe::where('fullname', $request->fullname)->first();
+             $employee = Employe::where('email', $request->email)->first();
 
             if ($employee && Hash::check($request->password, $employee->password)) {
                 auth('employee')->login($employee);
                 return redirect('/employee/dashboard');
             } else {
-                return back()->withErrors(['fullname' => 'fullname or password incorrect']);
+                return back()->withErrors(['email' => 'email or password incorrect']);
             }
     }
 

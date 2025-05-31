@@ -128,6 +128,14 @@ Update employer | Laravel Employes App
                             @enderror
                         </div>
 
+                         <div class="form-group mb-3">
+                            <label for="email">Email</label>
+                            <input type="text" value="{{ old('email', $employe->email) }}" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="email">
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="form-group text-end">
                             <button type="submit" class="btn btn-primary px-4">
                                 <i class="fas fa-save me-2"></i> Update

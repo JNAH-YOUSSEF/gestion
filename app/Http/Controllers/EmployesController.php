@@ -12,8 +12,7 @@ class EmployesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index() {
         $employes = Employe::all(); 
         return view('employes.index')->with([
             'employes' => $employes
@@ -23,8 +22,7 @@ class EmployesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
+    public function create(){
         return view('employes.create');
     }
 
@@ -42,6 +40,7 @@ class EmployesController extends Controller
             'city'               => 'required|string|max:100',
             'password'           => 'required|string|min:6',
             'image'              => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'email'              =>  'required|email'
         ]);
 
         $data = $request->except('_token', 'password');
@@ -54,6 +53,8 @@ class EmployesController extends Controller
             $imagePath = $request->file('image')->store('employes', 'public');
             $data['image'] = $imagePath;
         }
+
+
         
 
         Employe::create($data);
@@ -97,6 +98,8 @@ class EmployesController extends Controller
             'city'               => 'required|string|max:100',
             'password'           => 'nullable|string|min:6',
             'image'              => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'email'              =>  'required|email'
+
         ]);
 
         $data = $request->except('_token', '_method', 'password');
